@@ -1,1 +1,21 @@
 ## Documentation for User Interface class
+
+
+### Program Execution
+The program will be executed from the command line using the main class:
+
+    java topsecret
+
+### Userinterface behavior
+
+- Displays a numbered list of available files
+- Each file is shown with a matching two-digit number
+- Program exits after displaying the list
+
+
+#Input Validation and Errors
+
+- If invalid number of arg is provided, exception is thrown displaying message and exits program
+- If file number format is invalid, exception is thrown and program exits
+- If the requested file can't be found or deciphered, exception is thrown and program exits
+
