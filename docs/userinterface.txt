@@ -1,21 +1,46 @@
 ## Documentation for User Interface class
 
 
-### Program Execution
+## Overview
+
+The User Interface component is responsible for handling all interaction between the user and the program through the command line. It interprets command line arguments, checks for inputted arguments, and displays output or error messages to user
+
+The User Interface does not directly access files or perform dicphering. All requests for data are done through the program control class/interface
+
+
+## Program Execution
 The program will be executed from the command line using the main class:
 
-    java topsecret
+    'java topsecret'
+
+Program does one action per execution and exits after displaying output or an error message.
+
 
 ### Userinterface behavior
+
+1. No arguments
 
 - Displays a numbered list of available files
 - Each file is shown with a matching two-digit number
 - Program exits after displaying the list
 
+2. File selection using default key
 
-#Input Validation and Errors
+- Checks that def. key provided is a 2-digit file number
+- Requests the contents inside selected file from Program Control
+- The default cipher key is used when deciphering is required
+- Displays readable file content
+- Program exits after displaying content
+
+3. File selection using alt key
+
+- Checks that two-digit file number is valid
+- Requests the contents inside selected file from Program Control using key
+- Displays readable file contents
+- Program exits once content is displayed
+
+##Input Validation and Errors
 
 - If invalid number of arg is provided, exception is thrown displaying message and exits program
 - If file number format is invalid, exception is thrown and program exits
 - If the requested file can't be found or deciphered, exception is thrown and program exits
-
