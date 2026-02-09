@@ -42,6 +42,8 @@ public class ProgramControl {
      * @param keyArg
      * @return deciphered text using alt key
      */
+    //Nate: How does keyArg translate to a cipher? Is it a String with 26 characters,
+    // new line, then 26 characters?
     public String decipher(String cipheredText, String keyArg){
         //Implemented by Member D
         return null;

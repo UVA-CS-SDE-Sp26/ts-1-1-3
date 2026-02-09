@@ -1,0 +1,28 @@
+## Documentation for tests of ProgramControl class
+
+
+## Testing ProgramControl
+
+## Empty data folder
+
+getNumberedFileList() should return empty list of strings
+getFileContentsByNum() should return throw an exception for file not found
+
+## data folder with n files, some of which are text files
+
+getNumberedFileList() should return numbered list of all n file names
+
+Example:
+    01 filea.txt
+    02 fileb.txt
+    03 filec.txt
+
+getFileContentsByNum(String fileNumber) should
+    return file contents if file number corresponds to text file
+    throw an exception for file format if not text file
+    throw an exception for file not found if invalid fileNumber
+
+getFileContentsByNum(String fileNumber, String keyArg) should
+    throw the same exceptions as getFileContentsByNum(String fileNumber)
+    return deciphered file contents if file number corresponds to text file and keyArg corresponds to valid cipher
+    throw an exception for invalid cipher if cipher is invalid?
