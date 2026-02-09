@@ -1,0 +1,33 @@
+## Documentation for file handler
+
+
+## Overview
+
+The file handler should expect files in a folder named data.
+When a request for a file is received, this part of the program will return the file contents.
+This part of the program should handle all the direct access to files
+
+The ProgramController is the file handler
+
+
+## Program Execution
+The User Interface will call methods from the file handler with appropriate parameters
+
+
+### File handler behavior
+
+method 1: getNumberedFileList()
+        returns numbered list of available files for display
+
+method 2: getFileContentsByNum(String fileNumber)
+        returns readable file contents using default key
+
+method 3: getFileContentsByNum(String fileNumber, String keyArg)
+        returns readable file contents using alt key
+
+method 4: decipher(String cipheredText, String keyArg)
+        returns deciphered text using alt key
+
+##Input Validation and Errors
+
+If the requested file can't be found or deciphered, exception is thrown and program exits

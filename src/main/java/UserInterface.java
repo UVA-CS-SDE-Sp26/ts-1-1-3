@@ -8,7 +8,7 @@ public class UserInterface {
     interface name: ProgramControl (name doesnt really matter i can just
     change my class to the corresponding interface name)
 
-    //method 1: getNumberedFile()
+    //method 1: getNumberedFileList()
         returns numbered list of available files for display
 
     //method 2: getFileContentsByNum(String fileNumber)
