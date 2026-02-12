@@ -1,82 +1,74 @@
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class UserInterface {
 
-    /*
-   METHODS THAT NEED TO BE IMPLEMENTED BY MEMBER C:
-
-    interface name: ProgramControl (name doesnt really matter i can just
-    change my class to the corresponding interface name)
-
-    //method 1: getNumberedFileList()
-        returns numbered list of available files for display
-
-    //method 2: getFileContentsByNum(String fileNumber)
-        returns readable file contents using default key
-
-    //method 3: getFileContentsByNum(String fileNumber, String keyArg)
-        returns readable file contents using alt key
-     */
-
-
-    //update programControl to the interface memberC implements
     private final ProgramControl controller;
 
     public UserInterface(ProgramControl controller) {
         this.controller = controller;
-
-    }// userinterface method
+    }
 
     public void run(String[] args) {
-       //steps:
-        // no args: ask controller for #'ed file list & print
-        // 1 arg: check to see if it looks like file #, get content and print
-        // 2 args: check file #, ask for content w key, print
-        // else: error
-
-        //analyze / look at incoming args
-        //print the file list
-        //handle errors with exceptions
-
         try {
             if (args == null || args.length == 0) {
+                // no args: print numbered file list
                 List<String> files = controller.getNumberedFileList();
                 for (String line : files) {
                     System.out.println(line);
                 }
                 return;
-
             }
+
             if (args.length == 1) {
-                String fileNumber = args[0];
-                validateFileNumber((fileNumber));
-
-                String contents = controller.getFileContentsByNum(fileNumber);
+                // 1 arg: treat it as file number
+                int fileNum = parseAndValidateFileNumber(args[0]);
+                String contents = controller.getFileContentsByNum(String.valueOf(fileNum));
                 System.out.println(contents);
                 return;
-
             }
+
             if (args.length == 2) {
-                String fileNumber = args[0];
+                // 2 args: file number + alt key
+                int fileNum = parseAndValidateFileNumber(args[0]);
                 String keyArg = args[1];
-                validateFileNumber(fileNumber);
 
-                String contents = controller.getFileContentsByNum(fileNumber, keyArg);
+                String contents = controller.getFileContentsByNum(String.valueOf(fileNum), keyArg);
                 System.out.println(contents);
                 return;
             }
-            System.out.println("Too many arguments.");
+
+            System.out.println("Error: Too many arguments.");
+        } catch (FileNotFoundException e) {
+            // ProgramControl uses FileNotFoundException for missing folder / bad file number
+            System.out.println("Error: " + e.getMessage());
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-    } // run method
+    }
 
-    private void validateFileNumber(String fileNumber) {
-        if (fileNumber == null || !fileNumber.matches("\\d{2}")) {
-            throw new IllegalArgumentException("File number must be 2 digits (e.g., 01, 02, etc.).");
+    /**
+     * Accepts single or double digit file number and fails for any case that isn't an Int
+     */
+    private int parseAndValidateFileNumber(String fileNumber) {
+        if (fileNumber == null) {
+            throw new IllegalArgumentException("File number is required.");
         }
-    } //validateFileNumber method
-} // userinterface class
 
+        String s = fileNumber.trim();
+
+        int n;
+        try {
+            n = Integer.parseInt(s);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("File number must be an integer (e.g., 1 or 01).");
+        }
+
+        if (n < 1) {
+            throw new IllegalArgumentException("File number must be >= 1.");
+        }
+        return n;
+    }
+}
