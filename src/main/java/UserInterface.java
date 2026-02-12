@@ -74,7 +74,7 @@ public class UserInterface {
     } // run method
 
     private void validateFileNumber(String fileNumber) {
-        if (fileNumber == null | !fileNumber.matches("\\d{2}")) {
+        if (fileNumber == null || !fileNumber.matches("\\d{2}")) {
             throw new IllegalArgumentException("File number must be 2 digits (e.g., 01, 02, etc.).");
         }
     } //validateFileNumber method
