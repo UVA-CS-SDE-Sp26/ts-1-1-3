@@ -11,14 +11,14 @@ The User Interface does not directly access files or perform dicphering. All req
 ## Program Execution
 The program will be executed from the command line using the main class:
 
-    'java topsecret'
+    'java TopSecret'
 
-Program does one action per execution and exits after displaying output or an error message.
+The program does one action per execution and exits after displaying output or an error message.
 
 
 ### Userinterface behavior
 
-1. No arguments
+1. No arguments provided
 
 - Displays a numbered list of available files
 - Each file is shown with a matching two-digit number
