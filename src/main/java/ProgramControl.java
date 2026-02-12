@@ -22,6 +22,9 @@ public class ProgramControl {
             if (dataFileList == null){
                 throw new FileNotFoundException("Data folder is null");
             }
+            if (dataFileList.length == 0){
+                throw new FileNotFoundException("Data folder is empty");
+            }
 
             else {
                 List<String> NumberedFileList = new ArrayList<>();
@@ -31,6 +34,25 @@ public class ProgramControl {
                 return NumberedFileList;
             }
 
+    }
+
+    public List<String> getNumberedFileListTestVersion() throws FileNotFoundException {
+        File dataFolder = new File("testdata");
+        File[] dataFileList = dataFolder.listFiles();
+        if (dataFileList == null){
+            throw new FileNotFoundException("Data folder is null");
+        }
+        if (dataFileList.length == 0){
+            throw new FileNotFoundException("Data folder is empty");
+        }
+
+        else {
+            List<String> NumberedFileList = new ArrayList<>();
+            for (int i = 0; i < dataFileList.length; i++) {
+                NumberedFileList.add((i + 1) + " " + dataFileList[i].getName());
+            }
+            return NumberedFileList;
+        }
     }
 
     /**
@@ -62,6 +84,30 @@ public class ProgramControl {
         return fileContents;
     }
 
+    public String getFileContentsByNumTestVersion(String fileNumber) throws FileNotFoundException {
+        //Implemented by Member B
+
+        File dataFolder = new File("testdata");
+        File[] dataFileList = dataFolder.listFiles();
+        if (dataFileList == null){
+            throw new FileNotFoundException("Data folder is null");
+        }
+        int fileNumberInt = Integer.parseInt(fileNumber);
+
+        if (fileNumberInt < 1 || fileNumberInt > dataFileList.length){
+            throw new FileNotFoundException("Invalid file number");
+        }
+
+        File file = dataFileList[fileNumberInt-1];
+        String fileContents = "";
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()){
+            fileContents += "\n"+sc.nextLine();
+        }
+
+        return decipher(fileContents, "key.txt");
+    }
+
     /**
      *
      * @param fileNumber
@@ -79,8 +125,7 @@ public class ProgramControl {
      * @param keyArg
      * @return deciphered text using alt key
      */
-    //Nate: How does keyArg translate to a cipher? Is it a String with 26 characters,
-    // new line, then 26 characters?
+    //Nate: keyArg should be the name of a file in the ciphers folder, should validate the cipher
     public String decipher(String cipheredText, String keyArg){
         //Implemented by Member D
         return null;

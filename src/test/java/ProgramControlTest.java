@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProgramControlTest {
     private ProgramControl controller;
-
     @BeforeEach
     void setUp() {
         controller = new ProgramControl();
@@ -17,9 +16,9 @@ class ProgramControlTest {
     class EmptyFolderTests {
 
         @Test
-        void emptyFileListTest() { // There should be an exception thrown here if hte folder is empty.
+        void emptyFileListTest() { // There should be an exception thrown here if the folder is empty.
             Exception exception = assertThrows(FileNotFoundException.class, () -> {
-                controller.getNumberedFileList();
+                controller.getNumberedFileListTestVersion();
             });
             assertTrue(exception.getMessage().contains("Data folder"));
         }
@@ -27,9 +26,9 @@ class ProgramControlTest {
         @Test
         void emptyGetFileContents() { // Same as the numbered file list, should be exception if the folder is empty.
             Exception exception = assertThrows(FileNotFoundException.class, () -> {
-                controller.getFileContentsByNum("1");
+                controller.getFileContentsByNumTestVersion("1");
             });
-            assertTrue(exception.getMessage().contains("Data folder"));
+            assertTrue(exception.getMessage().contains("file number"));
         }
 
     }
@@ -57,6 +56,9 @@ class ProgramControlTest {
         void fileNumberTest() {
             assertThrows(FileNotFoundException.class, () -> { // This should throw an exception given an invalid number.
                 controller.getFileContentsByNum("500"); // Any random invalid number works here.
+            });
+            assertThrows(FileNotFoundException.class, () -> { // This should throw an exception given an invalid number.
+                controller.getFileContentsByNum("0"); // Any random invalid number works here.
             });
         }
 
