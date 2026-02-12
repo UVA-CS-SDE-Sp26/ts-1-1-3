@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ProgramControl {
 
@@ -37,9 +38,28 @@ public class ProgramControl {
      * @param fileNumber
      * @return readable file contents using default key
      */
-    public String getFileContentsByNum(String fileNumber){
+    public String getFileContentsByNum(String fileNumber) throws FileNotFoundException {
         //Implemented by Member B
-        return null;
+
+        File dataFolder = new File("data");
+        File[] dataFileList = dataFolder.listFiles();
+        if (dataFileList == null){
+            throw new FileNotFoundException("Data folder is null");
+        }
+        int fileNumberInt = Integer.parseInt(fileNumber);
+
+        if (fileNumberInt < 1 || fileNumberInt > dataFileList.length){
+            throw new FileNotFoundException("Invalid file number");
+        }
+
+        File file = dataFileList[fileNumberInt-1];
+        String fileContents = "";
+        Scanner sc = new Scanner(file);
+        while (sc.hasNextLine()){
+            fileContents += "\n"+sc.nextLine();
+        }
+
+        return fileContents;
     }
 
     /**
@@ -48,7 +68,7 @@ public class ProgramControl {
      * @param keyArg
      * @return readable file contents using alt key
      */
-    public String getFileContentsByNum(String fileNumber, String keyArg){
+    public String getFileContentsByNum (String fileNumber, String keyArg) throws FileNotFoundException {
         String temp = getFileContentsByNum(fileNumber);
         return decipher(temp, keyArg);
     }
