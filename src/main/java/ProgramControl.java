@@ -20,6 +20,7 @@ public class ProgramControl {
             File dataFolder = new File("data");
             File[] dataFileList = dataFolder.listFiles();
             if (dataFileList == null){
+                System.out.println("No files found");
                 throw new FileNotFoundException("Data folder is null");
             }
             if (dataFileList.length == 0){
@@ -77,6 +78,9 @@ public class ProgramControl {
         File file = dataFileList[fileNumberInt-1];
         String fileContents = "";
         Scanner sc = new Scanner(file);
+        if (sc.hasNextLine()){
+            fileContents += sc.nextLine();
+        }
         while (sc.hasNextLine()){
             fileContents += "\n"+sc.nextLine();
         }
@@ -101,11 +105,14 @@ public class ProgramControl {
         File file = dataFileList[fileNumberInt-1];
         String fileContents = "";
         Scanner sc = new Scanner(file);
+        if (sc.hasNextLine()){
+            fileContents += sc.nextLine();
+        }
         while (sc.hasNextLine()){
             fileContents += "\n"+sc.nextLine();
         }
 
-        return decipher(fileContents, "key.txt");
+        return fileContents;
     }
 
     /**
@@ -126,9 +133,10 @@ public class ProgramControl {
      * @return deciphered text using alt key
      */
     //Nate: keyArg should be the name of a file in the ciphers folder, should validate the cipher
-    public String decipher(String cipheredText, String keyArg){
+    public String decipher(String cipheredText, String keyArg) throws FileNotFoundException {
         //Implemented by Member D
-        return null;
+        CipherService cs =  new CipherService(keyArg);
+        return cs.decipher(cipheredText);
     }
 
 

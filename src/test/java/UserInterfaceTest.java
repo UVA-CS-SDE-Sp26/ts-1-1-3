@@ -42,8 +42,8 @@ class UserInterfaceTest {
     void getFileContentsValidArg() throws Exception {
         ProgramControl test = new ProgramControl() {
             @Override
-            public String getFileContentsByNum(String fileNumber) {
-                assertEquals("01", fileNumber);
+            public String getFileContentsByNum(String fileNumber, String keyArg) {
+                assertEquals("1", fileNumber);
                 return "Test print"; // This is to verify something prints.
             }
         };

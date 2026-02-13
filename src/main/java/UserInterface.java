@@ -23,7 +23,7 @@ public class UserInterface {
             if (args.length == 1) {
                 // 1 arg: treat it as file number
                 int fileNum = parseAndValidateFileNumber(args[0]);
-                String contents = controller.getFileContentsByNum(String.valueOf(fileNum));
+                String contents = controller.getFileContentsByNum(String.valueOf(fileNum), "ciphers/key.txt");
                 System.out.println(contents);
                 return;
             }

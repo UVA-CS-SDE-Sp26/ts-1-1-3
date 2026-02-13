@@ -2,6 +2,7 @@ import org.junit.jupiter.api.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,15 +42,26 @@ class ProgramControlTest {
             List<String> files = controller.getNumberedFileList();
             assertNotNull(files);
             assertTrue(!files.isEmpty());
+            List<String> dataFileList = new ArrayList<String>();
+            dataFileList.add("1 carnivore.cip");
+            dataFileList.add("2 carnivore.txt");
+            dataFileList.add("3 cointelpro.cip");
+            dataFileList.add("4 cointelpro.txt");
+            assertEquals(dataFileList, files,"Files in docs folder do not match");
         }
 
         @Test
         void getFileContentsTest() throws FileNotFoundException { // This should properly return all contents of the file.
             List<String> files = controller.getNumberedFileList();
-            String firstFile = "1";
-            String fileContent = controller.getFileContentsByNum(firstFile);
+            String secondFile = "2";
+            String fileContent = controller.getFileContentsByNum(secondFile);
             assertNotNull(fileContent);
             assertFalse(fileContent.isEmpty());
+            assertEquals("Carnivore, later renamed DCS1000, was a system implemented by the Federal Bureau of Investigation (FBI) that was"+
+                    "\ndesigned to monitor email and electronic communications. It used a customizable packet sniffer that could monitor all"+
+                    "\nof a target user's Internet traffic. Carnivore was implemented in October 1997. By 2005 it had been replaced with"+
+            "\nimproved commercial software.",fileContent,"Carnivore text does not match");
+
         }
 
         @Test

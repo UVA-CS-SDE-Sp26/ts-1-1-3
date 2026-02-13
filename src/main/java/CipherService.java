@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.nio.file.Files;
@@ -8,12 +9,12 @@ import java.io.IOException;
 public class CipherService {
     private Map<Character, Character> map;
 
-    public CipherService(String filePath) {
+    public CipherService(String filePath) throws FileNotFoundException {
         map = new HashMap<>();
         loadKey(filePath);
     }
 
-    private void loadKey(String filePath) {
+    private void loadKey(String filePath) throws FileNotFoundException {
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
 
@@ -35,7 +36,7 @@ public class CipherService {
             }
 
         } catch (IOException e) {
-            System.out.println("Error");
+            throw new FileNotFoundException("Cipher file not found");
         }
     }
 
