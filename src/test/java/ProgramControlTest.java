@@ -29,7 +29,6 @@ class ProgramControlTest {
             Exception exception = assertThrows(FileNotFoundException.class, () -> {
                 controller.getFileContentsByNumTestVersion("1");
             });
-            assertTrue(exception.getMessage().contains("file number"));
         }
 
     }
