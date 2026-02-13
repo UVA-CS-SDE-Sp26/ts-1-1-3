@@ -1,3 +1,5 @@
 ## Documentation for file handler
 
 To be written by Member D...
+
+Added the cipher method class and unit tests for it
