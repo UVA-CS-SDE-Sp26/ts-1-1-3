@@ -2,4 +2,27 @@
 
 To be written by Member D...
 
-Added the cipher method class and unit tests for it
+##Cipher behavior
+
+The cipher class is responsible for decoding text using a key file.
+The key file is expected to have two lines:
+the first line contains the original characters
+the second line contains the cipher characters
+Each character in the second line maps to the character in the same position in the first line.
+
+Example:
+line 1: abcdef
+line 2: bcdefa
+
+##CipherService Class
+
+The constructor takes a file path to a key file, and tbe he key file is read and a mapping is created from cipher characters to original characters.
+
+method: decipher(String text)
+each character in the input is replaced using the mapping
+
+if a character is not found in the mapping, it is left unchanged
+
+key file:
+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
+bcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890a
